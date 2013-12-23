@@ -1,0 +1,2751 @@
+a:link .btn-light,
+a:visited .btn-light{
+    color: red;    
+}
+
+// Dropdown arrow/caret
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top:   @caret-width-base solid @dropdown-caret-color;
+  border-right: @caret-width-base solid transparent;
+  border-left:  @caret-width-base solid transparent;
+  // Firefox fix for https://github.com/twbs/bootstrap/issues/9538. Once fixed,
+  // we can just straight up remove this.
+  border-bottom: 0 dotted;
+  content: "";
+}
+
+// The dropdown wrapper (div)
+.dropdown {
+  position: relative;
+}
+
+// Prevent the focus on the dropdown toggle when closing dropdowns
+.dropdown-toggle:focus {
+  outline: 0;
+}
+
+// The dropdown menu (ul)
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: @zindex-dropdown;
+  display: none; // none by default, but block on "open" of the menu
+  float: left;
+  min-width: 100%;
+  padding: 0;
+  margin: 2px 0 0; // override default ul
+  list-style: none;
+  font-size: @font-size-base;
+  background-color: @dropdown-bg;
+  border: 1px solid @dropdown-fallback-border; // IE8 fallback
+  border: 1px solid @dropdown-border;
+  border-radius: @border-radius-base;
+  box-shadow: none;
+  background-clip: padding-box;
+
+  // Aligns the dropdown menu to right
+  &.pull-right {
+    right: 0;
+    left: auto;
+  }
+
+  // Dividers (basically an hr) within the dropdown
+  .divider {
+    .nav-divider(@dropdown-divider-bg);
+  }
+
+  // Links within the dropdown menu
+  > li > a {
+    display: block;
+    border-bottom: 1px solid @brand-border;
+    padding: 6px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: @line-height-base;
+    color: @dropdown-link-color;
+    text-align: center;
+    white-space: nowrap; // prevent links from randomly breaking onto new lines
+  }
+}
+
+// Hover/Focus state
+.dropdown-menu > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @dropdown-link-hover-bg;
+  }
+}
+
+// Active state
+.dropdown-menu > .active > a {
+  &,
+  &:hover,
+  &:focus {
+    color: @dropdown-link-active-color;
+    text-decoration: none;
+    outline: 0;
+    background-color: @dropdown-link-active-bg;
+  }
+}
+
+// Disabled state
+//
+// Gray out text and ensure the hover/focus state remains gray
+
+.dropdown-menu > .disabled > a {
+  &,
+  &:hover,
+  &:focus {
+    color: @dropdown-link-disabled-color;
+  }
+}
+// Nuke hover/focus effects
+.dropdown-menu > .disabled > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    background-color: transparent;
+    background-image: none; // Remove CSS gradient
+    .reset-filter();
+    cursor: not-allowed;
+  }
+}
+
+// Open state for the dropdown
+.open {
+  // Show the menu
+  > .dropdown-menu {
+    margin-top: 0;
+    border-top: 1px solid lighten(@brand-primary, 10%);
+    display: block;
+  }
+
+  // Remove the outline when :focus is triggered
+  > a {
+    outline: 0;
+  }
+}
+
+// Dropdown section headers
+.dropdown-header {
+  display: block;
+  padding: 3px 20px;
+  font-size: @font-size-small;
+  line-height: @line-height-base;
+  color: @dropdown-header-color;
+}
+
+// Backdrop to catch body clicks on mobile, etc.
+.dropdown-backdrop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: @zindex-dropdown - 10;
+}
+
+// Right aligned dropdowns
+.pull-right > .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+// Allow for dropdowns to go bottom up (aka, dropup-menu)
+//
+// Just add .dropup after the standard .dropdown class and you're set, bro.
+// TODO: abstract this so that the navbar fixed styles are not placed here?
+
+.dropup,
+.navbar-fixed-bottom .dropdown {
+  // Reverse the caret
+  .caret {
+    // Firefox fix for https://github.com/twbs/bootstrap/issues/9538. Once this
+    // gets fixed, restore `border-top: 0;`.
+    border-top: 0 dotted;
+    border-bottom: 4px solid @dropdown-caret-color;
+    content: "";
+  }
+  // Different positioning for bottom up menu
+  .dropdown-menu {
+    top: auto;
+    bottom: 100%;
+  }
+}
+
+
+// Component alignment
+//
+// Reiterate per navbar.less and the modified component alignment there.
+
+@media (min-width: @grid-float-breakpoint) {
+  .navbar-right {
+    .dropdown-menu {
+      .pull-right > .dropdown-menu();
+    }
+  }
+}
+
+
+.dark-dropdown{
+    background: @dark;
+    > li > a {
+        color: @dropdown-dark-link-color;    
+        border-bottom: 1px solid @brand-border-dark;
+    }    
+}
+
+// Hover/Focus state
+.dark-dropdown > li > a {
+  &:hover,
+  &:focus {
+    color: @dropdown-dark-link-hover-color;
+    background-color: @dropdown-dark-link-hover-bg;
+  }
+}
+
+// Button Dropdown Styling
+//
+
+.btn-group > ul.dropdown-menu > .open {}
+
+ul.dropdown-default > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @default;
+  }
+}
+
+ul.dropdown-primary > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @brand-primary;
+  }
+}
+
+ul.dropdown-info > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @brand-info;
+  }
+}
+
+ul.dropdown-success > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @brand-success;
+  }
+}
+
+ul.dropdown-warning > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @brand-warning;
+  }
+}
+
+ul.dropdown-danger > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @brand-danger;
+  }
+}
+
+ul.dropdown-fire > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @fire;
+  }
+}
+
+ul.dropdown-lake > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @lake;
+  }
+}
+
+ul.dropdown-grass > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @grass;
+  }
+}
+
+ul.dropdown-sun > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @sun;
+  }
+}
+
+ul.dropdown-amethyst > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @amethyst;
+  }
+}
+
+ul.dropdown-light > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dark;
+    background-color: @light;
+  }
+}
+
+ul.dropdown-dark > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @dark;
+  }
+}
+
+
+//
+// Typography
+// --------------------------------------------------
+
+.v1,
+.v2,
+.v3 {
+  margin-top: @line-height-computed;
+  margin-bottom: (@line-height-computed / 2);
+  font-weight: 300;
+}
+.v4,
+.v5,
+.v6 {
+  margin-top: (@line-height-computed / 2);
+  margin-bottom: (@line-height-computed / 2);
+  font-weight: 300;
+}
+
+.v1{ font-size: floor(@font-size-base * 2.60); } // ~36px
+.v2 { font-size: floor(@font-size-base * 2.15); } // ~30px
+.v3 { font-size: ceil(@font-size-base * 1.70); } // ~24px
+.v4 { font-size: ceil(@font-size-base * 1.25); } // ~18px
+.v5 { font-size:  @font-size-base; }
+.v6 { font-size: ceil(@font-size-base * 0.85); } // ~12px
+
+// Body text
+// -------------------------
+
+p {
+  margin-top: 5px;
+  margin: 0 0 (@line-height-computed / 2);
+}
+.lead {
+  margin-bottom: @line-height-computed;
+  font-size: (@font-size-base * 1.15);
+  font-weight: 400;
+  line-height: 1.4;
+
+  @media (min-width: 768px) {
+    font-size: (@font-size-base * 1.5);
+  }
+}
+
+
+// Emphasis & misc
+// -------------------------
+
+// Ex: 14px base font * 85% = about 12px
+small   { font-size: 85%; }
+
+// Undo browser default styling
+cite    { font-style: normal; }
+
+// Contextual emphasis
+.text-muted          { color: @text-muted; }
+.text-primary        { color: @brand-primary; }
+.text-warning        { color: @state-warning-text; }
+.text-danger         { color: @state-danger-text; }
+.text-success        { color: @state-success-text; }
+.text-info           { color: @state-info-text; }
+
+// Alignment
+.text-left           { text-align: left; }
+.text-right          { text-align: right; }
+.text-center         { text-align: center; }
+
+
+// Headings
+// -------------------------
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: @headings-font-family;
+  font-weight: @headings-font-weight;
+  line-height: @headings-line-height;
+  small {
+    font-weight: normal;
+    line-height: 1;
+    color: @headings-small-color;
+  }
+}
+
+h1,
+h2,
+h3 {
+  margin-top: @line-height-computed;
+  margin-bottom: (@line-height-computed / 2);
+}
+h4,
+h5,
+h6 {
+  margin-top: (@line-height-computed / 2);
+  margin-bottom: (@line-height-computed / 2);
+}
+
+h1, .h1 { font-size: floor(@font-size-base * 2.60); } // ~36px
+h2, .h2 { font-size: floor(@font-size-base * 2.15); } // ~30px
+h3, .h3 { font-size: ceil(@font-size-base * 1.70); } // ~24px
+h4, .h4 { font-size: ceil(@font-size-base * 1.25); } // ~18px
+h5, .h5 { font-size:  @font-size-base; }
+h6, .h6 { font-size: ceil(@font-size-base * 0.85); } // ~12px
+
+h1 small, .h1 small { font-size: ceil(@font-size-base * 1.70); } // ~24px
+h2 small, .h2 small { font-size: ceil(@font-size-base * 1.25); } // ~18px
+h3 small, .h3 small,
+h4 small, .h4 small { font-size: @font-size-base; }
+
+
+// Page header
+// -------------------------
+
+.page-header {
+  padding-bottom: ((@line-height-computed / 2) - 1);
+  margin: (@line-height-computed * 2) 0 @line-height-computed;
+  border-bottom: 1px solid @page-header-border-color;
+}
+
+
+
+// Lists
+// --------------------------------------------------
+
+// Unordered and Ordered lists
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: (@line-height-computed / 2);
+  ul,
+  ol{
+    margin-bottom: 0;
+  }
+}
+
+// List options
+
+// Unstyled keeps list items block level, just removes default browser padding and list-style
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+// Inline turns list items into inline-block
+.list-inline {
+  .list-unstyled();
+  > li {
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+// Description Lists
+dl {
+  margin-bottom: @line-height-computed;
+}
+dt,
+dd {
+  line-height: @line-height-base;
+}
+dt {
+  font-weight: bold;
+}
+dd {
+  margin-left: 0; // Undo browser default
+}
+
+// Horizontal description lists
+//
+// Defaults to being stacked without any of the below styles applied, until the
+// grid breakpoint is reached (default of ~768px).
+
+@media (min-width: @grid-float-breakpoint) {
+  .dl-horizontal {
+    dt {
+      float: left;
+      width: (@component-offset-horizontal - 20);
+      clear: left;
+      text-align: right;
+      .text-overflow();
+    }
+    dd {
+      margin-left: @component-offset-horizontal;
+      .clearfix(); // Clear the floated `dt` if an empty `dd` is present
+    }
+  }
+}
+
+// MISC
+// ----
+
+// Abbreviations and acronyms
+abbr[title],
+// Added data-* attribute to help out our tooltip plugin, per https://github.com/twbs/bootstrap/issues/5257
+abbr[data-original-title] {
+  cursor: help;
+  border-bottom: 1px dotted @abbr-border-color;
+}
+abbr.initialism {
+  font-size: 90%;
+  text-transform: uppercase;
+}
+
+// Blockquotes
+blockquote {
+  padding: (@line-height-computed / 2) @line-height-computed;
+  margin: 0 0 @line-height-computed;
+  border-left: 5px solid @blockquote-border-color;
+  p {
+    font-size: (@font-size-base * 1.25);
+    font-weight: 300;
+    line-height: 1.25;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  small {
+    display: block;
+    line-height: @line-height-base;
+    color: @blockquote-small-color;
+    &:before {
+      content: '\2014 \00A0';// EM DASH, NBSP
+    }
+  }
+
+  // Float right with text-align: right
+  &.pull-right {
+    padding-right: 15px;
+    padding-left: 0;
+    border-right: 5px solid @blockquote-border-color;
+    border-left: 0;
+    p,
+    small {
+      text-align: right;
+    }
+    small {
+      &:before {
+        content: '';
+      }
+      &:after {
+        content: '\00A0 \2014';// NBSP, EM DASH
+      }
+    }
+  }
+}
+
+// Quotes
+q:before,
+q:after,
+blockquote:before,
+blockquote:after {
+  content: "";
+}
+
+// Addresses
+address {
+  display: block;
+  margin-bottom: @line-height-computed;
+  font-style: normal;
+  line-height: @line-height-base;
+}
+
+
+//
+// Forms
+// --------------------------------------------------
+
+
+// Normalize non-controls
+//
+// Restyle and baseline non-control form elements.
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: @line-height-computed;
+  font-size: (@font-size-base * 1.5);
+  line-height: inherit;
+  color: @legend-color;
+  border: 0;
+  border-bottom: 1px solid @legend-border-color;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: 400;
+}
+
+
+// Normalize form controls
+
+// Override content-box in Normalize (* isn't specific enough)
+input[type="search"] {
+  .box-sizing(border-box);
+}
+
+// Position radios and checkboxes better
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 4px 0 0;
+  margin-top: 1px \9; /* IE8-9 */
+  line-height: normal;
+  border-radius: 50%;
+}
+
+// Set the height of select and file controls to match text inputs
+input[type="file"] {
+  display: block;
+}
+
+// Make multiple select elements height not fixed
+select[multiple],
+select[size] {
+  height: auto;
+}
+
+// Fix optgroup Firefox bug per https://github.com/twbs/bootstrap/issues/7611
+select optgroup {
+  font-size: inherit;
+  font-style: inherit;
+  font-family: inherit;
+}
+
+// Focus for select, file, radio, and checkbox
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  .tab-focus();
+}
+
+// Fix for Chrome number input
+// Setting certain font-sizes causes the `I` bar to appear on hover of the bottom increment button.
+// See https://github.com/twbs/bootstrap/issues/8350 for more.
+input[type="number"] {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    height: auto;
+  }
+}
+
+
+// Placeholder
+//
+// Placeholder text gets special styles because when browsers invalidate entire
+// lines if it doesn't understand a selector/
+.form-control {
+  .placeholder();
+}
+
+
+// Common form controls
+//
+// Shared size and type resets for form controls. Apply `.form-control` to any
+// of the following form controls:
+//
+// select
+// textarea
+// input[type="text"]
+// input[type="password"]
+// input[type="datetime"]
+// input[type="datetime-local"]
+// input[type="date"]
+// input[type="month"]
+// input[type="time"]
+// input[type="week"]
+// input[type="number"]
+// input[type="email"]
+// input[type="url"]
+// input[type="search"]
+// input[type="tel"]
+// input[type="color"]
+
+input:active, textarea:focus, textarea:active, input[type="text"] input:focus, input[type]:focus, .uneditable-input:focus {   
+    box-shadow: none;
+    outline:0px;
+}
+
+textarea, textarea:focus, textarea:active {
+    border-color: @brand-primary;
+    outline: none;
+
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+}
+
+select:focus, input[type="text"]:focus,textarea[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus,  input[type="color"]:focus, .uneditable-input:focus, .form-control:focus {  
+    border-color: @brand-primary;
+    box-shadow:none !important;
+    outline: none;
+}
+
+.form-control {
+  box-shadow: none !important;
+  outline: 0 none;
+  display: block;
+  width: 100%;
+  height: @input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+  padding: @padding-base-vertical @padding-base-horizontal;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  color: @input-color;
+  vertical-align: middle;
+  background-color: @input-bg;
+  border: 1px solid @input-border;
+  border-radius: @input-border-radius;
+  // Customize the `:focus` state to imitate native WebKit styles.
+  .form-control-focus();
+
+  // Disabled and read-only inputs
+  // Note: HTML5 says that controls under a fieldset > legend:first-child won't
+  // be disabled if the fieldset is disabled. Due to implementation difficulty,
+  // we don't honor that edge case; we style them as disabled anyway.
+  &[disabled],
+  &[readonly],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+    background-color: @input-bg-disabled;
+  }
+
+  // Reset height for `textarea`s
+  textarea& {
+    height: auto;
+  }
+}
+
+
+// Form groups
+//
+// Designed to help with the organization and spacing of vertical forms. For
+// horizontal forms, use the predefined grid classes.
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+
+// Checkboxes and radios
+//
+// Indent the labels to position radios/checkboxes as hanging controls.
+
+.radio,
+.checkbox {
+  display: block;
+  min-height: @line-height-computed; // clear the floating input if there is no label text
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  vertical-align: middle;
+  label {
+    display: inline;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+  }
+}
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  float: left;
+  margin-left: -20px;
+}
+.radio + .radio,
+.checkbox + .checkbox {
+  margin-top: -5px; // Move up sibling radios or checkboxes for tighter spacing
+}
+
+// Radios and checkboxes on same line
+.radio-inline,
+.checkbox-inline {
+  display: inline-block;
+  padding-left: 20px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-weight: normal;
+  cursor: pointer;
+}
+.radio-inline + .radio-inline,
+.checkbox-inline + .checkbox-inline {
+  margin-top: 0;
+  margin-left: 10px; // space out consecutive inline controls
+}
+
+// Apply same disabled cursor tweak as for inputs
+//
+// Note: Neither radios nor checkboxes can be readonly.
+input[type="radio"],
+input[type="checkbox"],
+.radio,
+.radio-inline,
+.checkbox,
+.checkbox-inline {
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+  }
+}
+
+// Form control sizing
+.input-sm {
+  .input-size(@input-height-small; @padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @border-radius-small);
+}
+
+.input-lg {
+  .input-size(@input-height-large; @padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @border-radius-large);
+}
+
+
+// Form control feedback states
+//
+// Apply contextual and semantic states to individual form controls.
+
+// Warning
+.has-warning {
+  .form-control-validation(@state-warning-text; @state-warning-text; @state-warning-bg);
+}
+// Error
+.has-error {
+  .form-control-validation(@state-danger-text; @state-danger-text; @state-danger-bg);
+}
+// Success
+.has-success {
+  .form-control-validation(@state-success-text; @state-success-text; @state-success-bg);
+}
+
+
+// Static form control text
+//
+// Apply class to a `p` element to make any string of text align with labels in
+// a horizontal form layout.
+
+.form-control-static {
+  margin-bottom: 0; // Remove default margin from `p`
+  padding-top: (@padding-base-vertical + 1);
+}
+
+
+// Help text
+//
+// Apply to any element you wish to create light text for placement immediately
+// below a form control. Use for general help, formatting, or instructional text.
+
+.help-block {
+  display: block; // account for any element using help-block
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: lighten(@text-color, 25%); // lighten the text some for contrast
+}
+
+
+
+// Inline forms
+//
+// Make forms appear inline(-block) by adding the `.form-inline` class. Inline
+// forms begin stacked on extra small (mobile) devices and then go inline when
+// viewports reach <768px.
+//
+// Requires wrapping inputs and labels with `.form-group` for proper display of
+// default HTML form controls and our custom form controls (e.g., input groups).
+//
+// Heads up! This is mixin-ed into `.navbar-form` in navbars.less.
+
+.form-inline {
+
+  // Kick in the inline
+  @media (min-width: @screen-tablet) {
+    // Inline-block all the things for "inline"
+    .form-group  {
+      display: inline-block;
+      margin-bottom: 0;
+      vertical-align: middle;
+    }
+
+    // In navbar-form, allow folks to *not* use `.form-group`
+    .form-control {
+      display: inline-block;
+    }
+
+    // Remove default margin on radios/checkboxes that were used for stacking, and
+    // then undo the floating of radios and checkboxes to match (which also avoids
+    // a bug in WebKit: https://github.com/twbs/bootstrap/issues/1969).
+    .radio,
+    .checkbox {
+      display: inline-block;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+    .radio input[type="radio"],
+    .checkbox input[type="checkbox"] {
+      float: none;
+      margin-left: 0;
+    }
+  }
+}
+
+
+// Horizontal forms
+//
+// Horizontal forms are built on grid classes and allow you to create forms with
+// labels on the left and inputs on the right.
+
+.form-horizontal {
+
+  // Consistent vertical alignment of labels, radios, and checkboxes
+  .control-label,
+  .radio,
+  .checkbox,
+  .radio-inline,
+  .checkbox-inline {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: (@padding-base-vertical + 1); // Default padding plus a border
+  }
+
+  // Make form groups behave like rows
+  .form-group {
+    .make-row();
+  }
+
+  // Only right align form labels here when the columns stop stacking
+  @media (min-width: @screen-tablet) {
+    .control-label {
+      text-align: right;
+    }
+  }
+}
+
+
+//
+// Panels
+// --------------------------------------------------
+
+
+// Base class
+.panel {
+  margin-bottom: @line-height-computed;
+  background-color: @panel-bg;
+  border: 1px solid transparent;
+  border-radius: @panel-border-radius;
+  .box-shadow(0 1px 1px rgba(0,0,0,.05));
+}
+
+// Panel contents
+.panel-body {
+  padding: 15px;
+  .clearfix();
+}
+
+// List groups in panels
+//
+// By default, space out list group content from panel headings to account for
+// any kind of custom content between the two.
+
+.panel {
+  > .list-group {
+    margin-bottom: 0;
+
+    .list-group-item {
+      border-width: 1px 0;
+
+      // Remove border radius for top one
+      &:first-child {
+        .border-top-radius(0);
+      }
+      // But keep it for the last one
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+// Collapse space between when there's no additional content.
+.panel-heading + .list-group {
+  .list-group-item:first-child {
+    border-top-width: 0;
+  }
+}
+
+
+// Tables in panels
+//
+// Place a non-bordered `.table` within a panel (not within a `.panel-body`) and
+// watch it go full width.
+
+.panel {
+  > .table {
+    margin-bottom: 0;
+  }
+  > .panel-body + .table {
+    border-top: 1px solid @table-border-color;
+  }
+}
+
+
+// Optional heading
+.panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  .border-top-radius(@panel-border-radius - 1);
+}
+
+// Within heading, strip any `h*` tag of it's default margins for spacing.
+.panel-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: ceil((@font-size-base * 1.125));
+  > a {
+    color: inherit;
+  }
+}
+
+// Optional footer (stays gray in every modifier class)
+.panel-footer {
+  padding: 10px 15px;
+  background-color: @panel-footer-bg;
+  border-top: 1px solid @panel-inner-border;
+  .border-bottom-radius(@panel-border-radius - 1);
+}
+
+
+// Collapsable panels (aka, accordion)
+//
+// Wrap a series of panels in `.panel-group` to turn them into an accordion with
+// the help of our collapse JavaScript plugin.
+
+.panel-group {
+  // Tighten up margin so it's only between panels
+  .panel {
+    margin-bottom: 0;
+    border-radius: @panel-border-radius;
+    overflow: hidden; // crop contents when collapsed
+    + .panel {
+      margin-top: 5px;
+    }
+  }
+
+  .panel-heading {
+    border-bottom: 0;
+    + .panel-collapse .panel-body {
+      border-top: 1px solid @panel-inner-border;
+    }
+  }
+  .panel-footer {
+    border-top: 0;
+    + .panel-collapse .panel-body {
+      border-bottom: 1px solid @panel-inner-border;
+    }
+  }
+
+  // New subcomponent for wrapping collapsable content for proper animations
+  .panel-collapse {
+
+  }
+}
+
+
+// Contextual variations
+.panel-default {
+  .panel-variant(@panel-default-border; @panel-default-text; @panel-default-heading-bg; @panel-default-border);
+}
+.panel-primary {
+  .panel-variant(@panel-primary-border; @panel-primary-text; @panel-primary-heading-bg; @panel-primary-border);
+}
+.panel-success {
+  .panel-variant(@panel-success-border; @panel-success-text; @panel-success-heading-bg; @panel-success-border);
+}
+.panel-warning {
+  .panel-variant(@panel-warning-border; @panel-warning-text; @panel-warning-heading-bg; @panel-warning-border);
+}
+.panel-danger {
+  .panel-variant(@panel-danger-border; @panel-danger-text; @panel-danger-heading-bg; @panel-danger-border);
+}
+.panel-info {
+  .panel-variant(@panel-info-border; @panel-info-text; @panel-info-heading-bg; @panel-info-border);
+}
+.panel-fire {
+  .panel-variant(@panel-fire-border; @panel-fire-text; @panel-fire-heading-bg; @panel-fire-border);
+}
+.panel-lake {
+  .panel-variant(@panel-lake-border; @panel-lake-text; @panel-lake-heading-bg; @panel-lake-border);
+}
+.panel-grass {
+  .panel-variant(@panel-grass-border; @panel-grass-text; @panel-grass-heading-bg; @panel-grass-border);
+}
+.panel-sun {
+  .panel-variant(@panel-sun-border; @panel-sun-text; @panel-sun-heading-bg; @panel-sun-border);
+}
+.panel-amethyst {
+  .panel-variant(@panel-amethyst-border; @panel-amethyst-text; @panel-amethyst-heading-bg; @panel-amethyst-border);
+}
+.panel-light {
+  .panel-variant(@panel-light-border; @panel-light-text; @panel-light-heading-bg; @panel-light-border);
+}
+.panel-dark {
+  .panel-variant(@panel-dark-border; @panel-dark-text; @panel-dark-heading-bg; @panel-dark-border);
+}
+
+
+// Extra Styles
+//-------------
+
+p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.page-wrapper{
+    border-left: 1px solid #E8E8E8;
+    border-right: 1px solid #E8E8E8;
+    border-bottom: 1px solid #E8E8E8;
+    background: #FFF;
+    margin-top: -20px;
+    padding: 1.5%;
+}
+
+.page-header{
+    background: #FCFCFC;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+    margin-top: 0;
+    border-bottom: 1px solid @brand-border;   
+    max-height: 40px;    
+    font-weight: 400;
+    .icon-angle-right{
+        color: @brand-primary;
+    }
+    .v4{
+        font-size: 20px;
+        word-spacing: 3px;
+        color: #555;
+    }
+}
+
+.list-content{
+    color: #555;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border-bottom: 1px solid @brand-border;
+}
+
+.list-content:last-of-type{
+    border-bottom: none;
+}
+
+.side-content{
+    color: #555;
+    padding-bottom: 1.5%;
+}
+
+.side-content:last-of-type{
+    border-bottom: none;
+}
+
+.icon-box{
+    padding: 0;
+    background: @brand-primary;
+    border-radius: @border-radius-base;
+}
+
+.icon-stack > .icon{
+    color: darken(@brand-primary, 10%);
+    text-decoration: none;
+}
+
+.icon-stack > a:hover{
+    text-decoration: none;    
+}
+
+.box{
+    background: @brand-primary;
+    color: #FFF;
+    padding: 5%;
+    border: 1px solid darken(@brand-primary, 10%);
+    &:hover{
+    background: darken(@brand-primary, 3%);
+    color: #FFF;
+    padding: 5%;
+    border: 1px solid darken(@brand-primary, 20%);       
+    }
+}
+
+.center{
+    text-align: center;
+}
+
+.header{
+    background: #FAFAFA;
+    min-height: 80px;
+	line-height: 80px;
+
+	border-bottom: 1px solid @brand-border;
+    &h1{
+    font-weight: 300;
+	font-size: 30px;
+
+	color: #555;    
+    }
+}
+
+.push{
+	margin-top: -20px;
+}
+
+.pricing-header{
+    background: #444;
+    color: #FFF;
+    
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 15%;
+    padding-right: 15%;
+    text-align: center;
+}
+
+.pricing{
+    background: @light;
+    
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 15%;
+    padding-right: 15%;
+    text-align: center;
+    margin-bottom: 10px;
+    border-left: 1px solid @brand-border;
+    border-right: 1px solid @brand-border;
+    &li{
+        text-align: center;    
+    }
+}
+
+.quote{
+    border-right: 8px solid @gray-lighter;
+    padding-right: 3px;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.quotetext{
+    color: #999;    
+}
+
+.video {
+    position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.video iframe {
+    padding: 5px;
+    border: 1px solid #E8E8E8;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    background: #FFF;
+}
+
+.video iframe:hover{
+    border-color: @brand-primary;
+}
+
+.small{
+    max-width: 30%;    
+}
+
+.headerline{
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+.headerline a:link,
+.headerline a:visited{
+    text-decoration: none;    
+}
+
+.headerline a:hover{
+    text-decoration: none;    
+}
+
+.headerline > .v1,
+.headerline > .v2,
+.headerline > .v3,
+.headerline > .v4,
+.headerline > .v5{
+    border-bottom: 1px solid @brand-primary;    
+    display: inline-block;
+    font-weight: 300;    
+    padding-right: 2%;
+    padding-left: 2%;
+}
+
+.register{
+    border: 1px solid @brand-border;
+    border-radius: @border-radius-base;
+    background: #FCFCFC;
+    color: @gray-light;
+    
+    padding-top: 25px;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-bottom: 25px;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.signin{
+    border: 1px solid @brand-border;
+    border-radius: @border-radius-base;
+    background: #FCFCFC;
+    color: @gray-light;
+    
+    padding-top: 25px;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-bottom: 25px;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.grid{
+    background: lighten(@brand-primary, 25%);;
+    color: @gray;
+    border: 1px solid #888;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+// Tiles
+//
+// --------------------
+
+.small-tile{
+    padding: 4px;
+    margin: 2px 2px 2px;
+    max-width: 50px;
+    
+    .fire{
+        background: @fire;
+    }
+    .lake{
+        background: @lake;
+    }
+    .grass{
+        background: @grass;
+    }
+    .amethyst{
+        background: @amethyst;
+    }
+}
+.small-tile{
+    padding: 4px;
+    margin: 2px 2px 2px;
+    max-width: 50px;
+    
+    .fire{
+        background: @fire;
+    }
+    .lake{
+        background: @lake;
+    }
+    .grass{
+        background: @grass;
+    }
+    .amethyst{
+        background: @amethyst;
+    }
+}
+
+
+// Sticky Footer
+//--------------
+
+html,
+body {
+  height: 100%;
+}
+
+.wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
+
+.footer {
+  border-top: 1px solid @gray-lighter;
+  color: #FFF;
+  background-color: @brand-primary;
+  bottom: 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.footer a:link,
+.footer a:visited{
+    color: #FFF;    
+}
+
+.navbar-right{
+    float: right;    
+}
+
+@media (max-width: 767px) {
+  .navbar-right {
+    float: none;
+  }
+}
+
+.gray{
+    color: #BBB;
+    margin-top: 10px;
+}
+
+// Checkbox and Radio styles
+//--------------------------
+
+input[type="checkbox"],
+input[type="radio"]{
+    display:none;
+}
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:24px;
+    height:24px;
+    vertical-align:middle;
+    background: #FFF;
+	margin: 3px 3px;
+    border: 2px solid #E3E3E3;
+	border-radius: 1px;
+    cursor:pointer;
+}
+
+input[type="checkbox"]:checked + label span {
+    background: @brand-primary;
+    border-color: #CCC;
+}
+
+input[type="radio"] + label span {
+    display:inline-block;
+    width:24px;
+    height:24px;
+    vertical-align:middle;
+    background: #FFF;
+	margin: 3px 3px;
+    border: 2px solid #E3E3E3;
+	border-radius: 50%;
+    cursor:pointer;
+}
+
+input[type="radio"]:checked + label span {
+    background: @brand-primary;
+    border-color: #CCC;
+}
+
+.navbar-nav.nav-justified > li{
+    float:none;
+}
+
+// Slates
+//-------
+
+.slate-small{
+    padding: 8px;
+    color: #FFF;
+    max-width: 150px;
+    
+    margin-bottom: 10px;
+}
+
+.slate-medium{
+    padding: 12px;
+    color: #FFF;
+    max-width: 250px;
+    
+    margin-bottom: 10px;
+}
+
+.slate-large{
+    padding: 16px;
+    color: #FFF;
+    
+    margin-bottom: 10px;
+}
+
+.fire{
+    background: @fire;    
+}
+
+.lake{
+    background: @lake;    
+}
+
+.grass{
+    background: @grass;    
+}
+
+.sun{
+    background: @sun;    
+}
+.amethyst{
+    background: @amethyst;    
+}
+.dark{
+    background: @dark;    
+}
+
+// Buttons
+//--------
+
+// Core styles
+.btn {
+  color: #EEE;
+  background: @btn-default-bg;
+  display: inline-block;
+  padding: @padding-base-vertical @padding-base-horizontal;
+  margin-bottom: 0; // For input.btn
+  font-size: @font-size-base;
+  font-weight: @btn-font-weight;
+  line-height: @line-height-base;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: @border-radius-base;
+  white-space: nowrap;
+  .user-select(none);
+
+  &:focus {
+    .tab-focus();
+  }
+
+  &:hover,
+  &:focus {
+    color: #FFF;
+    background: #555;
+    text-decoration: none;
+  }
+
+  &:active,
+  &.active {
+    outline: 0;
+    background-image: none;
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+    pointer-events: none; // Future-proof disabling of clicks
+    .opacity(.65);
+    .box-shadow(none);
+  }
+
+}
+
+
+// Alternate buttons
+// -----------------
+
+.btn-default {
+  .button-variant(@btn-default-color; @btn-default-bg; @btn-default-border);
+}
+.btn-primary {
+  .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
+}
+// Warning appears as orange
+.btn-warning {
+  .button-variant(@btn-warning-color; @btn-warning-bg; @btn-warning-border);
+}
+// Danger and error appear as red
+.btn-danger {
+  .button-variant(@btn-danger-color; @btn-danger-bg; @btn-danger-border);
+}
+// Success appears as green
+.btn-success {
+  .button-variant(@btn-success-color; @btn-success-bg; @btn-success-border);
+}
+// Info appears as blue-green
+.btn-info {
+  .button-variant(@btn-info-color; @btn-info-bg; @btn-info-border);
+}
+
+.btn-fire {
+  .button-variant(@btn-fire-color; @btn-fire-bg; @btn-fire-border);
+}
+
+.btn-lake {
+  .button-variant(@btn-lake-color; @btn-lake-bg; @btn-lake-border);
+}
+
+.btn-grass {
+  .button-variant(@btn-grass-color; @btn-grass-bg; @btn-grass-border);
+}
+
+.btn-sun {
+  .button-variant(@btn-sun-color; @btn-sun-bg; @btn-sun-border);
+}
+
+.btn-amethyst {
+  .button-variant(@btn-amethyst-color; @btn-amethyst-bg; @btn-amethyst-border);
+}
+
+.btn-light {
+  .button-variant(@btn-light-color; @btn-light-bg; @btn-light-border);
+}
+
+.btn-dark {
+  .button-variant(@btn-dark-color; @btn-dark-bg; @btn-dark-border);
+}
+
+// Link buttons
+// ------------
+
+// Make a button look and behave like a link
+.btn-link {
+  color: @link-color;
+  font-weight: normal;
+  cursor: pointer;
+  border-radius: 0;
+
+  &,
+  &:active,
+  &[disabled],
+  fieldset[disabled] & {
+    background-color: transparent;
+    .box-shadow(none);
+  }
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: transparent;
+  }
+  &:hover,
+  &:focus {
+    color: @link-hover-color;
+    text-decoration: underline;
+    background-color: transparent;
+  }
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus {
+      color: @btn-link-disabled-color;
+      text-decoration: none;
+    }
+  }
+}
+
+
+// Button Sizes
+// --------------------------------------------------
+
+.btn-lg {
+  // line-height: ensure even-numbered height of button next to large input
+  .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @border-radius-large);
+}
+.btn-sm,
+.btn-xs {
+  // line-height: ensure proper height of button next to small input
+  .button-size(@padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @border-radius-small);
+}
+.btn-xs {
+  padding: 1px 5px;
+}
+
+.btn .caret{
+    border-top-color: #FFF;
+    border-bottom-color: #FFF;
+}
+
+.btn-link .caret, .btn-light .caret{
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+
+
+
+// Block button
+// --------------------------------------------------
+
+.btn-block {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// Vertically space out multiple block buttons
+.btn-block + .btn-block {
+  margin-top: 5px;
+}
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  &.btn-block {
+    width: 100%;
+  }
+}
+
+//
+// Progress bars
+// --------------------------------------------------
+
+
+// Bar animations
+// -------------------------
+
+// Webkit
+@-webkit-keyframes progress-bar-stripes {
+  from  { background-position: 40px 0; }
+  to    { background-position: 0 0; }
+}
+
+// Firefox
+@-moz-keyframes progress-bar-stripes {
+  from  { background-position: 40px 0; }
+  to    { background-position: 0 0; }
+}
+
+// Opera
+@-o-keyframes progress-bar-stripes {
+  from  { background-position: 0 0; }
+  to    { background-position: 40px 0; }
+}
+
+// Spec and IE10+
+@keyframes progress-bar-stripes {
+  from  { background-position: 40px 0; }
+  to    { background-position: 0 0; }
+}
+
+
+
+// Bar itself
+// -------------------------
+
+// Outer container
+.progress {
+  overflow: hidden;
+  height: @line-height-computed;
+  margin-bottom: @line-height-computed;
+  background-color: @progress-bg;
+  border-radius: @border-radius-base;
+}
+
+// Bar of progress
+.progress-bar {
+  float: left;
+  width: 0%;
+  height: 100%;
+  font-size: @font-size-small;
+  color: @progress-bar-color;
+  text-align: center;
+  background-color: @progress-bar-bg;
+  .transition(width .6s ease);
+}
+
+// Striped bars
+.progress-striped .progress-bar {
+  #gradient > .striped(@progress-bar-bg);
+  background-size: 40px 40px;
+}
+
+// Call animation for the active one
+.progress.active .progress-bar {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+     -moz-animation: progress-bar-stripes 2s linear infinite;
+      -ms-animation: progress-bar-stripes 2s linear infinite;
+       -o-animation: progress-bar-stripes 2s linear infinite;
+          animation: progress-bar-stripes 2s linear infinite;
+}
+
+
+
+// Variations
+// -------------------------
+
+.progress-bar-success {
+  .progress-bar-variant(@progress-bar-success-bg);
+}
+
+.progress-bar-info {
+  .progress-bar-variant(@progress-bar-info-bg);
+}
+
+.progress-bar-warning {
+  .progress-bar-variant(@progress-bar-warning-bg);
+}
+
+.progress-bar-danger {
+  .progress-bar-variant(@progress-bar-danger-bg);
+}
+
+.progress-bar-fire {
+  .progress-bar-variant(@progress-bar-fire-bg);
+}
+
+.progress-bar-lake {
+  .progress-bar-variant(@progress-bar-lake-bg);
+}
+
+.progress-bar-grass {
+  .progress-bar-variant(@progress-bar-grass-bg);
+}
+
+.progress-bar-sun {
+  .progress-bar-variant(@progress-bar-sun-bg);
+}
+
+.progress-bar-amethyst {
+  .progress-bar-variant(@progress-bar-amethyst-bg);
+}
+
+.progress-bar-dark {
+  .progress-bar-variant(@progress-bar-dark-bg);
+}
+
+
+
+//
+// Navbars
+// --------------------------------------------------
+
+
+// Wrapper and base class
+//
+// Provide a static navbar from which we expand to create full-width, fixed, and
+// other navbar variations.
+
+.navbar {
+  position: relative;
+  z-index: @zindex-navbar;
+  min-height: @navbar-height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
+  margin-bottom: @navbar-margin-bottom;
+  border: 1px solid transparent;
+
+  // Prevent floats from breaking the navbar
+  .clearfix();
+
+  @media (min-width: @grid-float-breakpoint) {
+    border-radius: @navbar-border-radius;
+  }
+}
+
+
+// Navbar heading
+//
+// Groups `.navbar-brand` and `.navbar-toggle` into a single component for easy
+// styling of responsive aspects.
+
+.navbar-header {
+  .clearfix();
+
+  @media (min-width: @grid-float-breakpoint) {
+    float: left;
+  }
+}
+
+
+// Navbar collapse (body)
+//
+// Group your navbar content into this for easy collapsing and expanding across
+// various device sizes. By default, this content is collapsed when <768px, but
+// will expand past that for a horizontal display.
+//
+// To start (on mobile devices) the navbar links, forms, and buttons are stacked
+// vertically and include a `max-height` to overflow in case you have too much
+// content for the user's viewport.
+
+.navbar-collapse {
+  max-height: 340px;
+  overflow-x: visible;
+  padding-right: @navbar-padding-horizontal;
+  padding-left:  @navbar-padding-horizontal;
+  border-top: 1px solid transparent;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+  .clearfix();
+  -webkit-overflow-scrolling: touch;
+
+  &.in {
+    overflow-y: auto;
+  }
+
+  @media (min-width: @grid-float-breakpoint) {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+
+    &.collapse {
+      display: block !important;
+      height: auto !important;
+      padding-bottom: 0; // Override default setting
+      overflow: visible !important;
+    }
+
+    &.in {
+      overflow-y: visible;
+    }
+
+    // Account for first and last children spacing
+    .navbar-nav.navbar-left:first-child {
+      margin-left: -@navbar-padding-horizontal;
+    }
+    .navbar-nav.navbar-right:last-child {
+      margin-right: -@navbar-padding-horizontal;
+    }
+    .navbar-text:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+
+// Both navbar header and collapse
+//
+// When a container is present, change the behavior of the header and collapse.
+
+.container > .navbar-header,
+.container > .navbar-collapse {
+  margin-right: -@navbar-padding-horizontal;
+  margin-left:  -@navbar-padding-horizontal;
+
+  @media (min-width: @grid-float-breakpoint) {
+    margin-right: 0;
+    margin-left:  0;
+  }
+}
+
+
+//
+// Navbar alignment options
+//
+// Display the navbar across the entirity of the page or fixed it to the top or
+// bottom of the page.
+
+// Static top (unfixed, but 100% wide) navbar
+.navbar-static-top {
+  border-width: 0 0 1px;
+  @media (min-width: @grid-float-breakpoint) {
+    border-radius: 0;
+  }
+}
+
+// Fix the top/bottom navbars when screen real estate supports it
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+  position: fixed;
+  right: 0;
+  left: 0;
+  border-width: 0 0 1px;
+
+  // Undo the rounded corners
+  @media (min-width: @grid-float-breakpoint) {
+    border-radius: 0;
+  }
+}
+.navbar-fixed-top {
+  z-index: @zindex-navbar-fixed;
+  top: 0;
+}
+.navbar-fixed-bottom {
+  bottom: 0;
+  margin-bottom: 0; // override .navbar defaults
+}
+
+
+// Brand/project name
+
+.navbar-brand {
+  float: left;
+  padding: @navbar-padding-vertical @navbar-padding-horizontal;
+  font-size: @font-size-large;
+  line-height: @line-height-computed;
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  @media (min-width: @grid-float-breakpoint) {
+    .navbar > .container & {
+      margin-left: -@navbar-padding-horizontal;
+    }
+  }
+}
+
+
+// Navbar toggle
+//
+// Custom button for toggling the `.navbar-collapse`, powered by the collapse
+// JavaScript plugin.
+
+.navbar-toggle {
+  position: relative;
+  float: right;
+  margin-right: @navbar-padding-horizontal;
+  padding: 9px 10px;
+  .navbar-vertical-align(34px);
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: @border-radius-base;
+
+  // Bars
+  .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+  }
+  .icon-bar + .icon-bar {
+    margin-top: 4px;
+  }
+
+  @media (min-width: @grid-float-breakpoint) {
+    display: none;
+  }
+}
+
+
+// Navbar nav links
+//
+// Builds on top of the `.nav` components with it's own modifier class to make
+// the nav the full height of the horizontal nav (above 768px).
+
+.navbar-nav {
+  margin: (@navbar-padding-vertical / 2) -@navbar-padding-horizontal;
+
+  > li > a {
+    padding-top:    10px;
+    padding-bottom: 10px;
+    line-height: @line-height-computed;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    // Dropdowns get custom display when collapsed
+    .open .dropdown-menu {
+      position: static;
+      float: none;
+      width: auto;
+      margin-top: 0;
+      background-color: transparent;
+      border: 0;
+      box-shadow: none;
+      > li > a,
+      .dropdown-header {
+        padding: 5px 15px 5px 25px;
+      }
+      > li > a {
+        line-height: @line-height-computed;
+        &:hover,
+        &:focus {
+          background-image: none;
+        }
+      }
+    }
+  }
+
+  // Uncollapse the nav
+  @media (min-width: @grid-float-breakpoint) {
+    float: left;
+    margin: 0;
+
+    > li {
+      float: left;
+      > a {
+        padding-top: ((@navbar-height - @line-height-computed) / 2);
+        padding-bottom: ((@navbar-height - @line-height-computed) / 2);
+      }
+    }
+  }
+
+}
+
+
+// Component alignment
+//
+// Repurpose the pull utilities as their own navbar utilities to avoid specifity
+// issues with parents and chaining. Only do this when the navbar is uncollapsed
+// though so that navbar contents properly stack and align in mobile.
+
+@media (min-width: @grid-float-breakpoint) {
+  .navbar-left  { .pull-left(); }
+  .navbar-right { .pull-right(); }
+}
+
+
+// Navbar form
+//
+// Extension of the `.form-inline` with some extra flavor for optimum display in
+// our navbars.
+
+.navbar-form {
+  margin-left: -@navbar-padding-horizontal;
+  margin-right: -@navbar-padding-horizontal;
+  padding: 10px @navbar-padding-horizontal;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  @shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.1);
+  .box-shadow(@shadow);
+
+  // Mixin behavior for optimum display
+  .form-inline();
+
+  .form-group {
+    @media (max-width: @screen-xs-max) {
+      margin-bottom: 5px;
+    }
+  }
+
+  // Vertically center in expanded, horizontal navbar
+  .navbar-vertical-align(@input-height-base);
+
+  // Undo 100% width for pull classes
+  @media (min-width: @grid-float-breakpoint) {
+    width: auto;
+    border: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    .box-shadow(none);
+  }
+}
+
+
+// Dropdown menus
+
+// Menu position and menu carets
+.navbar-nav > li > .dropdown-menu {
+  margin-top: 0;
+  .border-top-radius(0);
+}
+// Menu position and menu caret support for dropups via extra dropup class
+.navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
+  .border-bottom-radius(0);
+}
+
+// Right aligned menus need alt position
+.navbar-nav.pull-right > li > .dropdown-menu,
+.navbar-nav > li > .dropdown-menu.pull-right {
+  left: auto;
+  right: 0;
+}
+
+
+// Buttons in navbars
+//
+// Vertically center a button within a navbar (when *not* in a form).
+
+.navbar-btn {
+  .navbar-vertical-align(@input-height-base);
+}
+
+
+// Text in navbars
+//
+// Add a class to make any element properly align itself vertically within the navbars.
+
+.navbar-text {
+  float: left;
+  .navbar-vertical-align(@line-height-computed);
+
+  @media (min-width: @grid-float-breakpoint) {
+    margin-left: @navbar-padding-horizontal;
+    margin-right: @navbar-padding-horizontal;
+  }
+}
+
+// Alternate navbars
+// --------------------------------------------------
+
+// Default navbar
+.navbar-default {
+  background-color: @navbar-default-bg;
+  border-color: @navbar-default-border;
+  -webkit-transition: 0.3s all;
+  -moz-transition: 0.3s all;
+
+  .navbar-brand {
+    color: @navbar-default-brand-color;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+    &:hover,
+    &:focus {
+      color: @navbar-default-brand-hover-color;
+      background-color: @navbar-default-brand-hover-bg;
+     -webkit-transition: 0.3s all;
+     -moz-transition: 0.3s all;
+    }
+  }
+
+  .navbar-text {
+    color: @navbar-default-color;
+  }
+
+  .navbar-nav {
+    > li > a {
+      color: @navbar-default-link-color;
+      text-transform: uppercase;
+     -webkit-transition: 0.3s all;
+     -moz-transition: 0.3s all;
+
+      &:hover,
+      &:focus {
+        color: @navbar-default-link-hover-color;
+        background-color: @navbar-default-link-hover-bg;
+        -webkit-transition: 0.3s all;
+        -moz-transition: 0.3s all;
+      }
+    }
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-default-link-active-color;
+        background-color: @navbar-default-link-active-bg;
+      }
+    }
+    > .disabled > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-default-link-disabled-color;
+        background-color: @navbar-default-link-disabled-bg;
+      }
+    }
+  }
+
+  .navbar-toggle {
+    border-color: #FFF;
+    &:hover,
+    &:focus {
+      background-color: transparent;
+    }
+    .icon-bar {
+      background-color: #FFF;
+    }
+  }
+
+  .navbar-collapse,
+  .navbar-form {
+    border-color: darken(@navbar-default-bg, 7%);
+  }
+
+  // Dropdown menu items and carets
+  .navbar-nav {
+    // Caret should match text color on hover
+    > .dropdown > a:hover .caret,
+    > .dropdown > a:focus .caret {
+      border-top-color: #FFF;
+      border-bottom-color: #FFF;
+    }
+
+    // Remove background color from open dropdown
+    > .open > a {
+      &,
+      &:hover,
+      &:focus {
+        background-color: @navbar-default-link-active-bg;
+        color: #FFF;
+        .caret {
+          border-top-color: #FFF;
+          border-bottom-color: #FFF;
+        }
+      }
+    }
+    > .dropdown > a .caret {
+      border-top-color: #FFF;
+      border-bottom-color: #FFF;
+    }
+
+
+    @media (max-width: @screen-xs-max) {
+      // Dropdowns get custom display when collapsed
+      .open .dropdown-menu {
+        > li > a {
+          color: @navbar-default-link-color;
+          &:hover,
+          &:focus {
+            color: @navbar-default-link-hover-color;
+            background-color: @navbar-default-link-hover-bg;
+          }
+        }
+        > .active > a {
+          &,
+          &:hover,
+          &:focus {
+            color: @navbar-default-link-active-color;
+            background-color: @navbar-default-link-active-bg;
+          }
+        }
+        > .disabled > a {
+          &,
+          &:hover,
+          &:focus {
+            color: @navbar-default-link-disabled-color;
+            background-color: @navbar-default-link-disabled-bg;
+          }
+        }
+      }
+    }
+  }
+
+
+  // Links in navbars
+  //
+  // Add a class to ensure links outside the navbar nav are colored correctly.
+
+  .navbar-link {
+    color: @navbar-default-link-color;
+    &:hover {
+      color: @navbar-default-link-hover-color;
+    }
+  }
+
+}
+
+// Inverse navbar
+
+.navbar-dark {
+  background-color: @navbar-dark-bg;
+  border-color: @navbar-dark-border;
+  -webkit-transition: 0.3s all;
+  -moz-transition: 0.3s all;
+
+  .navbar-brand {
+    color: @navbar-dark-brand-color;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+    &:hover,
+    &:focus {
+      color: @navbar-dark-brand-hover-color;
+      background-color: @navbar-dark-brand-hover-bg;
+     -webkit-transition: 0.3s all;
+     -moz-transition: 0.3s all;
+    }
+  }
+
+  .navbar-text {
+    color: @navbar-dark-color;
+  }
+
+  .navbar-nav {
+    > li > a {
+      color: @navbar-dark-link-color;
+      text-transform: uppercase;
+     -webkit-transition: 0.3s all;
+     -moz-transition: 0.3s all;
+
+      &:hover,
+      &:focus {
+        color: @navbar-dark-link-hover-color;
+        background-color: @navbar-dark-link-hover-bg;
+       -webkit-transition: 0.3s all;
+       -moz-transition: 0.3s all;
+      }
+    }
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-dark-link-active-color;
+        background-color: @navbar-dark-link-active-bg;
+      }
+    }
+    > .disabled > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-dark-link-disabled-color;
+        background-color: @navbar-dark-link-disabled-bg;
+      }
+    }
+  }
+
+  // Darken the responsive nav toggle
+  .navbar-toggle {
+    border-color: @navbar-dark-toggle-border-color;
+    &:hover,
+    &:focus {
+      background-color: @navbar-dark-toggle-hover-bg;
+    }
+    .icon-bar {
+      background-color: @navbar-dark-toggle-icon-bar-bg;
+    }
+  }
+
+  .navbar-collapse,
+  .navbar-form {
+    border-color: darken(@navbar-dark-bg, 7%);
+  }
+
+  // Dropdowns
+  .navbar-nav {
+    > .open > a {
+      &,
+      &:hover,
+      &:focus {
+        background-color: @navbar-dark-link-active-bg;
+        color: @navbar-dark-link-active-color;
+      }
+    }
+    > .dropdown > a:hover .caret {
+      border-top-color: @navbar-dark-link-hover-color;
+      border-bottom-color: @navbar-dark-link-hover-color;
+    }
+    > .dropdown > a .caret {
+      border-top-color: @navbar-dark-link-color;
+      border-bottom-color: @navbar-dark-link-color;
+    }
+    > .open > a {
+      &,
+      &:hover,
+      &:focus {
+        .caret {
+          border-top-color: @navbar-dark-link-active-color;
+          border-bottom-color: @navbar-dark-link-active-color;
+        }
+      }
+    }
+
+    @media (max-width: @screen-xs-max) {
+      // Dropdowns get custom display
+      .open .dark-dropdown-menu {
+        > .dark-dropdown-header {
+          border-color: @navbar-dark-border;
+        }
+        > li > a {
+          color: @navbar-dark-link-color;
+          &:hover,
+          &:focus {
+            color: @navbar-dark-link-hover-color;
+            background-color: @navbar-dark-link-hover-bg;
+          }
+        }
+        > .active > a {
+          &,
+          &:hover,
+          &:focus {
+            color: @navbar-dark-link-active-color;
+            background-color: @navbar-dark-link-active-bg;
+          }
+        }
+        > .disabled > a {
+          &,
+          &:hover,
+          &:focus {
+            color: @navbar-dark-link-disabled-color;
+            background-color: @navbar-dark-link-disabled-bg;
+          }
+        }
+      }
+    }
+  }
+
+  .navbar-link {
+    color: @navbar-dark-link-color;
+    &:hover {
+      color: @navbar-dark-link-hover-color;
+    }
+  }
+
+}
+
+
+// Minimal navbar
+
+.navbar-light {
+  background-color: @navbar-light-bg;
+  border-color: @navbar-light-border;
+  -webkit-transition: 0.3s all;
+  -moz-transition: 0.3s all;
+
+  .navbar-brand {
+    color: @navbar-light-brand-color;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+    &:hover,
+    &:focus {
+      color: @navbar-light-brand-hover-color;
+      background-color: @navbar-light-brand-hover-bg;
+     -webkit-transition: 0.3s all;
+     -moz-transition: 0.3s all;
+    }
+  }
+
+  .navbar-text {
+    color: @navbar-light-color;
+  }
+
+  .navbar-nav {
+    > li > a {
+      color: @navbar-light-link-color;
+      text-transform: uppercase;
+     -webkit-transition: 0.3s all;
+     -moz-transition: 0.3s all;
+
+      &:hover,
+      &:focus {
+        color: @navbar-light-link-hover-color;
+        background-color: @navbar-light-link-hover-bg;
+       -webkit-transition: 0.3s all;
+       -moz-transition: 0.3s all;
+      }
+    }
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-light-link-active-color;
+        background-color: @navbar-light-link-active-bg;
+      }
+    }
+    > .disabled > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-light-link-disabled-color;
+        background-color: @navbar-light-link-disabled-bg;
+      }
+    }
+  }
+
+  // Darken the responsive nav toggle
+  .navbar-toggle {
+    border-color: #777;
+    &:hover,
+    &:focus {
+      background-color: transparent;
+    }
+    .icon-bar {
+      background-color: #777;
+    }
+  }
+
+  .navbar-collapse,
+  .navbar-form {
+    border-color: darken(@navbar-light-bg, 7%);
+  }
+
+  // Dropdowns
+  .navbar-nav {
+    > .open > a {
+      &,
+      &:hover,
+      &:focus {
+        background-color: @navbar-light-link-active-bg;
+        color: @navbar-light-link-active-color;
+      }
+    }
+    > .dropdown > a:hover .caret {
+      border-top-color: @navbar-light-link-hover-color;
+      border-bottom-color: @navbar-light-link-hover-color;
+    }
+    > .dropdown > a .caret {
+      border-top-color: @navbar-light-link-color;
+      border-bottom-color: @navbar-light-link-color;
+    }
+    > .open > a {
+      &,
+      &:hover,
+      &:focus {
+        .caret {
+          border-top-color: @navbar-light-link-active-color;
+          border-bottom-color: @navbar-light-link-active-color;
+        }
+      }
+    }
+
+    @media (max-width: @screen-xs-max) {
+      // Dropdowns get custom display
+      .open .dropdown-menu {
+        > .dropdown-header {
+          border-color: @navbar-light-border;
+        }
+        > li > a {
+          color: @navbar-light-link-color;
+          &:hover,
+          &:focus {
+            color: @navbar-light-link-hover-color;
+            background-color: @navbar-light-link-hover-bg;
+          }
+        }
+        > .active > a {
+          &,
+          &:hover,
+          &:focus {
+            color: @navbar-light-link-active-color;
+            background-color: @navbar-light-link-active-bg;
+          }
+        }
+        > .disabled > a {
+          &,
+          &:hover,
+          &:focus {
+            color: @navbar-light-link-disabled-color;
+            background-color: @navbar-light-link-disabled-bg;
+          }
+        }
+      }
+    }
+  }
+
+  .navbar-link {
+    color: @navbar-light-link-color;
+    &:hover {
+      color: @navbar-light-link-hover-color;
+    }
+  }
+
+}
+
+.navbar-light .dropdown-menu > li > a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dropdown-link-hover-color;
+    background-color: @brand-primary;
+  }
+}
+
+
+//
+// Pagination (multiple pages)
+// --------------------------------------------------
+.pagination {
+  > li {
+    display: inline; // Remove list-style and block-level defaults
+    > a,
+    > span {
+        color: @pagination-color;
+    }
+  }
+}
+
+
+// Label Colors
+// Contextual variations (linked labels get darker on :hover)
+
+.label-default {
+  .label-variant(@label-default-bg);
+}
+
+.label-primary {
+  .label-variant(@label-primary-bg);
+}
+
+.label-success {
+  .label-variant(@label-success-bg);
+}
+
+.label-info {
+  .label-variant(@label-info-bg);
+}
+
+.label-warning {
+  .label-variant(@label-warning-bg);
+}
+
+.label-danger {
+  .label-variant(@label-danger-bg);
+}
+
+.label-fire {
+  .label-variant(@label-fire-bg);
+}
+
+.label-lake {
+  .label-variant(@label-lake-bg);
+}
+
+.label-grass {
+  .label-variant(@label-grass-bg);
+}
+
+.label-sun {
+  .label-variant(@label-sun-bg);
+}
+
+.label-amethyst {
+  .label-variant(@label-amethyst-bg);
+}
+
+// Thumbnails
+//
+
+.thumbnail, .img-thumbnail{
+    margin-bottom: 10px;
+    &:hover{
+        border-color: @brand-primary;
+    }
+}
+
+// Small fixes
+//------------
+
+.navbar > .container {
+  padding-right: 0;
+}
